@@ -37,6 +37,7 @@ class one_hot_encoder:
         self.columns_to_encode = []
         self.columns_to_keep = []
 
+
     def fit(self, df):
 
         numerics = [np.int8, np.int16, np.int32, np.int64, np.float32, np.float64]
@@ -58,6 +59,7 @@ class one_hot_encoder:
             else:
                 self.top_values[column] = df[column].value_counts().sort_values(ascending=False).index[0:self.number_of_top_values]
 
+
     def transform(self, df):
 
         """create DataFrame with all numeric columns and initialize empty DataFrame for binary encoded data"""
@@ -75,4 +77,15 @@ class one_hot_encoder:
         df = df_numeric.merge(df_non_numeric, how='inner', left_index=True, right_index=True)
 
         return df
+
+
+    def fit_transform(self, df):
+
+        """execute fit & transform"""
+
+        self.fit(df)
+        df = self.transform(df)
+
+        return df
+
         
