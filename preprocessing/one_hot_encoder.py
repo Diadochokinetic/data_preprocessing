@@ -1,7 +1,8 @@
 import pandas as pd 
 import numpy as np
+from sklearn.base import TransformerMixin
 
-class one_hot_encoder:
+class one_hot_encoder(TransformerMixin):
 
     """
     This module performs binary encoding on columns containing categorical data.
